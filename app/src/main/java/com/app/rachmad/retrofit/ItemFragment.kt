@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.rachmad.retrofit.`object`.MovieData
 import com.app.rachmad.retrofit.viewmodel.ListModel
+import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
 /**
  * A fragment representing a list of Items.
@@ -44,12 +45,14 @@ class ItemFragment : Fragment() {
         viewModel.movie()
 
         // Set the adapter
-        if (view is RecyclerView) {
+        if (view.list is RecyclerView) {
             movieList.observe(this, Observer<List<MovieData>> { movieData ->
-                val adapter = MyItemRecyclerViewAdapter(movieData, listener)
-//                    Log.d("test", "Notif Data Change")
-                adapter.notifyDataSetChanged()
-                recyclerView.adapter = adapter
+                if(movieData != null) {
+                    val adapter = MyItemRecyclerViewAdapter(movieData!!, listener)
+                    adapter.notifyDataSetChanged()
+                    view.list.layoutManager = LinearLayoutManager(this.context)
+                    view.list.adapter = adapter
+                }
             })
         }
         return view
@@ -82,7 +85,7 @@ class ItemFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: MovieData?)
     }
 
     companion object {

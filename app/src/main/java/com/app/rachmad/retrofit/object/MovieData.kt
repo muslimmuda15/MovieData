@@ -1,10 +1,9 @@
 package com.app.rachmad.retrofit.`object`
 
 data class MovieBaseData(
-        val result: List<MovieData>,
+        val results: List<MovieData>,
         val page: Int,
         val total_results: Int,
-        val dates: List<String>,
         val total_pages: Int
 )
 
@@ -18,5 +17,7 @@ data class MovieData(
         val poster_path: String,
         val original_language: String,
         val original_title: String,
-        val genre_ids: List<String>
+        val genre_ids: List<String>,
+        val overview: String,
+        val release_date: String
 )

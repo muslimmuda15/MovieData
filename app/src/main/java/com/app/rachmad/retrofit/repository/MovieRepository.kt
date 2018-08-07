@@ -42,7 +42,7 @@ class MovieRepository{
                     val data = response.body()
                     if(data != null){
                         if(response.code() == 200 && response.isSuccessful){
-                            movieLiveData.value = data.result
+                            movieLiveData.value = data.results
                         }
                         else{
                             movieLiveData.value = null
